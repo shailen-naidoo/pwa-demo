@@ -35,11 +35,17 @@
     }
   </style>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then(res => {
-        // console.log(res);
-      });
-    }
+    const registerSw = async () => {
+      if (!('serviceWorker' in navigator)) {
+        return;
+      }
+
+      const reg = await navigator.serviceWorker.register('/sw.js');
+
+      await reg.update();
+    };
+
+    registerSw();
   </script>
 </body>
 

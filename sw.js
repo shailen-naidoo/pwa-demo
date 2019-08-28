@@ -11,22 +11,22 @@ self.addEventListener('fetch', (e) => {
     caches.open('pages').then(async cache => {
       if (navigator.connection.effectiveType === '3g') {
         if (e.request.destination !== 'document') {
-          return await fetch(e.request);
+          return fetch(e.request);
         }
 
-        return await fetch('/3g.html');
+        return fetch('/3g.html');
       }
 
       if (navigator.connection.effectiveType === '2g') {
         if (e.request.destination === 'document') {
-          return await fetch('/2g.html');
+          return fetch('/2g.html');
         }
 
         if(e.request.destination === 'image') {
-          return await fetch('/2g.jpeg');
+          return fetch('/2g.jpeg');
         }
 
-        return await fetch(e.request);
+        return fetch(e.request);
       }
 
       const [res, error] = await fetch(e.request)
@@ -41,7 +41,7 @@ self.addEventListener('fetch', (e) => {
         return cache.match('/offline.jpeg');
       }
 
-      return await cache.match('/offline.html');
+      return cache.match('/offline.html');
     })
   );
 });

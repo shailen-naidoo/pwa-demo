@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PWA | Background Sync</title>
+  <script>
+    const registerSw = async () => {
+      if (!('serviceWorker' in navigator)) {
+        return;
+      }
+
+      const reg = await navigator.serviceWorker.register('/sw.js');
+
+      await reg.update();
+    };
+
+    registerSw();
+  </script>
+</head>
+<body>
+  <input type="text">
+  <button onclick="submit()">Submit</button>
+  <script>
+    const input = document.querySelector('input');
+
+    const submit = () => {
+      navigator.serviceWorker.ready.then((sw) => {
+        return sw.sync.register(JSON.stringify({
+          id: 'userData',
+          data: {
+            name: input.value,
+          },
+        }));
+      });
+    }
+  </script>
+</body>
+</html>

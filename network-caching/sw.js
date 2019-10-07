@@ -1,12 +1,19 @@
 self.addEventListener('install', (e) => {
+  console.log('Installing Service Worker!');
   e.waitUntil(
     caches.open('pages').then(cache => {
+      console.log('Caching resources');
       return cache.addAll(['/offline.html', '/offline.jpeg']);
     })
   );
 });
 
+self.addEventListener('activate', (e) => {
+  console.log('Activating Service Worker!');
+});
+
 self.addEventListener('fetch', (e) => {
+  console.log('Fetching resource!');
   e.respondWith(
     caches.open('pages').then(async cache => {
       if (navigator.connection.effectiveType === '3g') {

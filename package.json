@@ -16,6 +16,7 @@
   "scripts": {
     "nc": "npx live-server --port=8080 ./network-caching",
     "bs": "npx live-server --port=3000 ./background-sync",
-    "api": "node index.js"
+    "api": "node index.js",
+    "bs-demo": "yarn bs & yarn api"
   }
 }

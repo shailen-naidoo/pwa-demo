@@ -7,7 +7,7 @@
 
 ### How to run
 
-1.The commands are all in the `dev.sh` file, first source `dev.sh`
+1. The commands are all in the `dev.sh` file, first source `dev.sh`
 2. In Chrome Dev Tools go the **Application** tab, that is where you will find the Service Worker tools
 
 #### Network Caching Demo
